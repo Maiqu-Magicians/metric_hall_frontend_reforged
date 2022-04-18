@@ -143,6 +143,7 @@ const unlike = async () => {
     width: 80px !important;
     height: 80px;
     position: relative;
+    border-radius: 10px;
   }
 }
 

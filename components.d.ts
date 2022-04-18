@@ -22,6 +22,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/Base/Footer.vue')['default']
     Header: typeof import('./src/components/Home/Header.vue')['default']
     Info: typeof import('./src/components/Home/Info.vue')['default']
+    IntroCard: typeof import('./src/components/Home/IntroCard.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     MineCard: typeof import('./src/components/Mine/MineCard.vue')['default']
     MineInfo: typeof import('./src/components/Mine/MineInfo.vue')['default']
@@ -30,7 +31,9 @@ declare module 'vue' {
     ProductListView: typeof import('./src/components/Products/ProductListView.vue')['default']
     ProductRowView: typeof import('./src/components/Products/ProductRowView.vue')['default']
     ReadingList: typeof import('./src/components/Home/ReadingList.vue')['default']
+    RecommendProducts: typeof import('./src/components/Home/RecommendProducts.vue')['default']
     Sample: typeof import('./src/components/sample.vue')['default']
+    TopCar: typeof import('./src/components/Home/TopCar.vue')['default']
   }
 }
 

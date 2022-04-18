@@ -34,8 +34,8 @@ onMounted(async () => {
 }
 
 .home {
-  height: 20vh;
-  background-color: #ececec;
+  //height: 20vh;
+  //background-color: #ececec;
 }
 
 .iconc {

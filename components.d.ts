@@ -20,6 +20,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Footer: typeof import('./src/components/Base/Footer.vue')['default']
+    HaveATry: typeof import('./src/components/Home/HaveATry.vue')['default']
     Header: typeof import('./src/components/Home/Header.vue')['default']
     Info: typeof import('./src/components/Home/Info.vue')['default']
     IntroCard: typeof import('./src/components/Home/IntroCard.vue')['default']

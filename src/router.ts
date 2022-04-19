@@ -36,6 +36,10 @@ const routes: Array<RouteRecordRaw> = [
         ],
     },
     {
+        path:"/question",
+        component:() => import("./views/Questionare/ClassicQuestionare.vue")
+    },
+    {
         path: "/mine",
         name: "Mine",
         component: () => import("./views/Mine.vue"),

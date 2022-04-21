@@ -36,8 +36,8 @@ const routes: Array<RouteRecordRaw> = [
         ],
     },
     {
-        path:"/question",
-        component:() => import("./views/Questionare/ClassicQuestionare.vue")
+        path: "/question",
+        component: () => import("./views/Questionare/ClassicQuestionare.vue")
     },
     {
         path: "/mine",
@@ -50,6 +50,11 @@ const routes: Array<RouteRecordRaw> = [
                 return false
             }
         }
+    },
+    {
+        path: "/details/:id",
+        name: 'Details',
+        component: () => import("./views/Details.vue")
     },
     {
         path: "/oauth2",

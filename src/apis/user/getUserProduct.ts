@@ -21,7 +21,7 @@ export async function getUserProduct(userid: number, jwt: string): Promise<Produ
             const all = response.data.data.myEvaluations;
             if (all.length != 0) {
                 for (const i of all) {
-                    const a = new Product(i.name, i.id, i.coverPic, i.realUrl, i.price * 100, i.type);
+                    const a = new Product(i.name, i.id, i.coverPic, i.realUrl, i.price * 100, i.type,i.bgPic);
                     res.push(a);
                 }
             }
@@ -48,7 +48,7 @@ export async function getFavProduct(userid: number, jwt: string): Promise<Produc
             const all = response.data.data.likeEvaluations;
             if (all.length != 0) {
                 for (const i of all) {
-                    const a = new Product(i.name, i.id, i.coverPic, i.realUrl, i.price * 100, i.type);
+                    const a = new Product(i.name, i.id, i.coverPic, i.realUrl, i.price * 100, i.type,i.bgPic);
                     res.push(a);
                 }
             }

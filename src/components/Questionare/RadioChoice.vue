@@ -10,10 +10,10 @@
 
 <script lang="ts" setup>
 import {Question} from "../../entity/Questionare";
-import {computed, ref} from "vue";
+import {computed, PropType, ref} from "vue";
 
 const props = defineProps({
-  questions: {type: Question,required:true}
+  questions: {type:Object as PropType<Question>, required: true}
 })
 
 const q = computed(() => {
@@ -23,7 +23,10 @@ const q = computed(() => {
 const ans = ref("")
 
 const select = () => {
-  emits("next",props.questions.index,ans.value)
+  setTimeout(() => {
+    emits("next", props.questions.index, ans.value)
+    ans.value = "";
+  },500)
 }
 
 const emits = defineEmits(["next"])

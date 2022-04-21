@@ -24,7 +24,8 @@ export default async function getAllProducts(
                     i.coverPic,
                     i.realUrl,
                     i.price * 100,
-                    i.type
+                    i.type,
+                    i.bgPic
                 );
                 res.push(p);
             }

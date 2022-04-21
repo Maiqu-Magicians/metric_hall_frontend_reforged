@@ -6,6 +6,7 @@ type Product = {
     price: number;
     backgd_url: string;
     target_url: string;
+    bigPic:string;
     alreadyHave?: boolean;
     isLiked?:boolean;
     type: number;

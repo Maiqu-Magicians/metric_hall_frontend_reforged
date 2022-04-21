@@ -6,6 +6,7 @@ export default class Product {
         public readonly target_url: string,
         public readonly price: number,
         public readonly type: number,
+        public readonly bigPic: string,
         public alreadyHave?: boolean,
         public isLiked?: boolean
     ) {

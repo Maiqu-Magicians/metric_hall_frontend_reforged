@@ -14,6 +14,13 @@ export const ProductStore = defineStore("pd", {
             myFav: [] as Product[]
         };
     },
+    getters: {
+        getById: (store) => {
+            return (id: number) => {
+                return store.productLs.find(r => r.index === id)!
+            }
+        }
+    },
     actions: {
         async getAll() {
             const login = loginState();

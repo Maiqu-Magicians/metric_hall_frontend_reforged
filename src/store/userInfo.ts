@@ -24,9 +24,9 @@ export const userInfo = defineStore("userInfo", {
             ;
     },
     actions: {
-        async fetchInfo(userid: number, jwt: string): Promise<boolean> {
+        async fetchInfo(userid: number): Promise<boolean> {
             let success = false;
-            await getInfo(userid, jwt).then((data) => {
+            await getInfo(userid).then((data) => {
                 this.userInfo = data;
                 success = true;
             });
@@ -34,32 +34,27 @@ export const userInfo = defineStore("userInfo", {
         },
         async editNickname(username: string): Promise<void> {
             const login = loginState()
-            await editUsername(username, login.userid, login.jwtToken)
-            await this.fetchInfo(login.userid, login.jwtToken)
+            await editUsername(username, login.userid)
+            await this.fetchInfo(login.userid)
         },
         async editSign(sign: string): Promise<void> {
             const login = loginState()
-            await editSignature(sign, login.userid, login.jwtToken)
-            await this.fetchInfo(login.userid, login.jwtToken)
+            await editSignature(sign, login.userid)
+            await this.fetchInfo(login.userid)
         },
         async editAvtr(url: string): Promise<void> {
             const login = loginState()
-            await editAvatar(url, login.userid, login.jwtToken)
-            await this.fetchInfo(login.userid, login.jwtToken)
+            await editAvatar(url, login.userid)
+            await this.fetchInfo(login.userid)
         },
         async editBack(url: string): Promise<void> {
             const login = loginState()
-            await editBackground(url, login.userid, login.jwtToken)
-            await this.fetchInfo(login.userid, login.jwtToken)
+            await editBackground(url, login.userid)
+            await this.fetchInfo(login.userid)
         },
         async getOrder(): Promise<void> {
             const login = loginState()
-            await getOrders(login.userid, login.jwtToken).then(
-                res => {
-                    this.Order = res
-                    console.log(this.Order)
-                }
-            )
+            this.Order = await getOrders(login.userid, login.jwtToken)
         }
     },
 });

@@ -1,12 +1,12 @@
 <template>
   <el-card shadow="always" class="product" @click="ClickCard()">
     <div>
-      <img :src="props.product.backgd_url" alt=""/>
+      <img :src="props.product.coverPic" alt=""/>
     </div>
     <div class="description">
       <p class="title">{{ props.product.name }}</p>
       <p class="more-info">{{ props.product.name }}</p>
-      <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price / 100 }}</span>
+      <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price  }}</span>
       <span class="have" v-else>已经购买</span>
     </div>
   </el-card>
@@ -16,6 +16,7 @@
 import buyProduct from "../../apis/products/buyProduct";
 import {loginState} from "../../store/loginStatus";
 import addProduct from "../../apis/products/addProduct";
+import Product from "../../entity/product";
 
 const login = loginState()
 
@@ -26,9 +27,9 @@ const ClickCard = async () => {
     return
   }
   if (props.product.alreadyHave) {
-    window.open(props.product.target_url)
+    window.open(props.product.realUrl)
   } else {
-    await buyProduct(String(props.product.index), login.userid).then((res) => {
+    await buyProduct(String(props.product.id), login.userid).then((res) => {
       WeixinJSBridge.invoke(
           "getBrandWCPayRequest",
           {
@@ -41,7 +42,7 @@ const ClickCard = async () => {
           },
           async (res: any) => {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-              await addProduct(props.product.index).then(
+              await addProduct(props.product.id).then(
                   res => {
                     if (res) {
                       location.reload()

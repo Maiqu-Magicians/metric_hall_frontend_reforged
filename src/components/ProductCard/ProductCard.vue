@@ -2,7 +2,7 @@
 
     <div>
       <el-card shadow="always" class="product" @click.stop="ClickCard()">
-        <img :src="props.product.backgd_url" alt=""/>
+        <img :src="props.product.coverPic" alt=""/>
         <div class="description">
           <div style="width: 100%; margin-top: 0;">
             <div class="like">
@@ -24,7 +24,7 @@
             </div>
             <div class="below-content">
               <span class="more-info">{{ props.product.name }}</span>
-              <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price / 100 }}</span>
+              <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price }}</span>
               <span class="have" v-else>已经购买</span>
             </div>
           </div>
@@ -43,6 +43,8 @@ import buyProduct from "../../apis/products/buyProduct";
 import {loginState} from "../../store/loginStatus";
 import addProduct from "../../apis/products/addProduct";
 import {ProductStore} from "../../store/products";
+import Product from "../../entity/product";
+import InitBuyProduct from "../../apis/products/buyProduct";
 
 const login = loginState()
 
@@ -53,9 +55,9 @@ const ClickCard = async () => {
     return
   }
   if (props.product.alreadyHave) {
-    window.open(props.product.target_url)
+    window.open(props.product.realUrl)
   } else {
-    await buyProduct(String(props.product.index), login.userid).then((res) => {
+    await InitBuyProduct(String(props.product.id), login.userid).then((res) => {
       WeixinJSBridge.invoke(
           "getBrandWCPayRequest",
           {
@@ -68,7 +70,7 @@ const ClickCard = async () => {
           },
           async (res: any) => {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
-              await addProduct(props.product.index).then(
+              await addProduct(props.product.id).then(
                   res => {
                     if (res) {
                       location.reload()
@@ -83,10 +85,10 @@ const ClickCard = async () => {
 };
 const products = ProductStore()
 const like = async () => {
-  await products.addFav(props.product.index)
+  await products.addFav(props.product.id)
 }
 const unlike = async () => {
-  await products.delFav(props.product.index)
+  await products.delFav(props.product.id)
 }
 </script>
 

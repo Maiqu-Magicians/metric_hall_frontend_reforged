@@ -4,7 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    DataList: typeof import('./src/components/Home/DataList.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -23,18 +22,15 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Footer: typeof import('./src/components/Base/Footer.vue')['default']
     HaveATry: typeof import('./src/components/Home/HaveATry.vue')['default']
-    Header: typeof import('./src/components/Home/Header.vue')['default']
-    Info: typeof import('./src/components/Home/Info.vue')['default']
     IntroCard: typeof import('./src/components/Home/IntroCard.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     MineCard: typeof import('./src/components/Mine/MineCard.vue')['default']
     MineInfo: typeof import('./src/components/Mine/MineInfo.vue')['default']
-    ProductCard: typeof import('./src/components/Card/ProductCard.vue')['default']
-    ProductCardCol: typeof import('./src/components/Card/ProductCardCol.vue')['default']
+    ProductCard: typeof import('./src/components/ProductCard/ProductCard.vue')['default']
+    ProductCardCol: typeof import('./src/components/ProductCard/ProductCardCol.vue')['default']
     ProductListView: typeof import('./src/components/Products/ProductListView.vue')['default']
     ProductRowView: typeof import('./src/components/Products/ProductRowView.vue')['default']
     RadioChoice: typeof import('./src/components/Questionare/RadioChoice.vue')['default']
-    ReadingList: typeof import('./src/components/Home/ReadingList.vue')['default']
     RecommendProducts: typeof import('./src/components/Home/RecommendProducts.vue')['default']
     Sample: typeof import('./src/components/sample.vue')['default']
     TopCar: typeof import('./src/components/Home/TopCar.vue')['default']

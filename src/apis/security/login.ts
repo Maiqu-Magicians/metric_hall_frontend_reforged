@@ -14,7 +14,7 @@ export default async function login(
     let jwt = "";
     let userid = 0;
     await axios({
-        url: "https://api.maiquer.tech/api/login",
+        url: "/api/login",
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",

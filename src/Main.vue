@@ -12,17 +12,22 @@ import {loginState} from "./store/loginStatus";
 import {onMounted, onBeforeMount} from "vue";
 import {userInfo} from "./store/userInfo";
 import {ProductStore} from "./store/products";
+import axios from "axios";
 // begin init login state
 const login = loginState()
 const info = userInfo();
 const products = ProductStore();
+axios.defaults.baseURL="https://api.maiquer.tech"
 
 
 onBeforeMount(async () => {
-//
 //after mounted, init products
       login.loadfromLocal();
-      await Promise.all([info.fetchInfo(login.userid,login.jwtToken), products.getAll()]);
+      if (login.isLoggedIn) {
+        axios.defaults.headers.common["Authorization"] = login.jwtToken
+        await info.fetchInfo(login.userid)
+      }
+      await products.getAll();
     }
 )
 

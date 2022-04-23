@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import ProductCard from "../../components/Card/ProductCard.vue";
+import ProductCard from "../../components/ProductCard/ProductCard.vue";
 import {computed, ref} from "vue";
 import {ProductStore} from "../../store/products";
 import {useRouter} from "vue-router";

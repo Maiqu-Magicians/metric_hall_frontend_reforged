@@ -3,7 +3,7 @@ import qs from "qs";
 import axios from "axios";
 
 const login = loginState()
-/*
+/**
 @param id 产品ID
 @return 什么都不返回
 */
@@ -11,10 +11,9 @@ const addProduct = async (id: number) => {
     let success = false;
     await axios({
         method: "POST",
-        url: `https://api.maiquer.tech/api/user/addMyEva`,
+        url: `/api/user/addMyEva`,
         headers: {
             "content-type": "application/x-www-form-urlencoded",
-            Authorization: login.jwtToken,
         }, data: qs.stringify({userId: login.userid, evaId: id}),
     }).then(
         res => {

@@ -3,7 +3,6 @@ import getAllProducts from "../apis/products/queryAllProducts";
 import {getFavProduct, getUserProduct} from "../apis/user/getUserProduct";
 import Product from "../entity/product";
 import {loginState} from "./loginStatus";
-import {log} from "util";
 import {addFavourite, delFavourite} from "../apis/user/editFav";
 
 
@@ -17,7 +16,7 @@ export const ProductStore = defineStore("pd", {
     getters: {
         getById: (store) => {
             return (id: number) => {
-                return store.productLs.find(r => r.index === id)!
+                return store.productLs.find(r => r.id === id)!
             }
         }
     },
@@ -25,19 +24,19 @@ export const ProductStore = defineStore("pd", {
         async getAll() {
             const login = loginState();
             const Fall = getAllProducts();
-            const Fusr = getUserProduct(login.userid, login.jwtToken);
-            const Ffav = getFavProduct(login.userid, login.jwtToken)
+            const Fusr = getUserProduct(login.userid);
+            const Ffav = getFavProduct(login.userid)
             // next we will mark those
             await Promise.all([Fall, Fusr, Ffav]).then((result) => {
                 let all = result[0];
                 const usr = result[1];
                 const fav = result[2];
                 for (const i of usr) {
-                    const index = all.findIndex((a) => a.index == i.index);
+                    const index = all.findIndex((a) => a.id == i.id);
                     all[index].alreadyHave = true;
                 }
                 for (const i of fav) {
-                    const index = all.findIndex(a => a.index == i.index)
+                    const index = all.findIndex(a => a.id == i.id)
                     all[index].isLiked = true;
                 }
                 // store products
@@ -46,7 +45,7 @@ export const ProductStore = defineStore("pd", {
         },
         async getFav() {
             const login = loginState()
-            await getFavProduct(login.userid, login.jwtToken).then(
+            await getFavProduct(login.userid).then(
                 res => {
                     this.myFav = res
                 }
@@ -54,12 +53,12 @@ export const ProductStore = defineStore("pd", {
         },
         async addFav(evaId: number) {
             const login = loginState()
-            await addFavourite(evaId, login.userid, login.jwtToken)
+            await addFavourite(evaId, login.userid)
             await this.getAll()
         },
         async delFav(evaId: number) {
             const login = loginState()
-            await delFavourite(evaId, login.userid, login.jwtToken)
+            await delFavourite(evaId, login.userid)
             await this.getAll()
         }
     },

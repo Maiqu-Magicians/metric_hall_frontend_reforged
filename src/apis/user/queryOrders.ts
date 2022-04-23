@@ -5,7 +5,7 @@ import Order from "../../entity/order";
 export default async function getOrders(userid: number, jwt: string): Promise<Order[]> {
     let res = [] as Order[]
     await axios({
-        url: `https://api.maiquer.tech/api/order/queryPersonal/${userid}`,
+        url: `/api/order/queryPersonal/${userid}`,
         headers: {
             Authorization: jwt
         },

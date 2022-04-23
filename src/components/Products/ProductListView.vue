@@ -3,7 +3,7 @@
                     appear-active-class="animate__animated animate__bounceInUp"
                      mode="out-in">
 
-    <div v-for="i of props.listing " :key="i.index">
+    <div v-for="i of props.listing " :key="i.id">
       <product-card :product="i" :showLike="props.showLike"></product-card>
     </div>
   </transition-group>

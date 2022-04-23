@@ -1,17 +1,5 @@
 /// <reference types="vite/client" />
 
-type Product = {
-    name: string;
-    index: number;
-    price: number;
-    backgd_url: string;
-    target_url: string;
-    bigPic:string;
-    alreadyHave?: boolean;
-    isLiked?:boolean;
-    type: number;
-};
-
 declare module "*.vue" {
     import type {DefineComponent} from "vue";
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types

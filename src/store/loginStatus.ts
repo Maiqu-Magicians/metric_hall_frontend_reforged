@@ -9,7 +9,7 @@ export const loginState = defineStore("login", {
         return {
             isLoggedIn: false,
             hasJWTs: false,
-            jwtToken: "" as string,
+            jwtToken: "",
             userid: 0,
         };
     },

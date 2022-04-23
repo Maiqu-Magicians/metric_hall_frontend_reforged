@@ -19,6 +19,7 @@ declare type payd = {
 declare module "weixin-js-sdk";
 declare module "qs";
 
-declare class WeixinJSBridge {
-    static invoke: (arg0: string, arg1: any, arg3: (res: any) => void) => {};
+declare module WeixinJSBridge {
+    // @ts-ignore
+    async function invoke(arg0: string, arg1: any, arg3: (res: any) => void):Promise<void>
 }

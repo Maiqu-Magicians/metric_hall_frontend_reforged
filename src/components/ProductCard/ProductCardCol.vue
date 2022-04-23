@@ -6,14 +6,14 @@
     <div class="description">
       <p class="title">{{ props.product.name }}</p>
       <p class="more-info">{{ props.product.name }}</p>
-      <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price  }}</span>
+      <span class="price" v-if="!props.product.alreadyHave">价格：¥ {{ props.product.price }}</span>
       <span class="have" v-else>已经购买</span>
     </div>
   </el-card>
 </template>
 
 <script setup lang="ts">
-import buyProduct from "../../apis/products/buyProduct";
+import {BuyProduct} from "../../apis/products/buyProduct";
 import {loginState} from "../../store/loginStatus";
 import addProduct from "../../apis/products/addProduct";
 import Product from "../../entity/product";
@@ -29,30 +29,8 @@ const ClickCard = async () => {
   if (props.product.alreadyHave) {
     window.open(props.product.realUrl)
   } else {
-    await buyProduct(String(props.product.id), login.userid).then((res) => {
-      WeixinJSBridge.invoke(
-          "getBrandWCPayRequest",
-          {
-            appId: res.appId, //公众号ID，由商户传入
-            timeStamp: res.timeStamp, //时间戳，自1970年以来的秒数
-            nonceStr: res.nonceStr, //随机串
-            package: res.package, //
-            signType: "RSA", //微信签名方式：
-            paySign: res.paySign, //微信签名
-          },
-          async (res: any) => {
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
-              await addProduct(props.product.id).then(
-                  res => {
-                    if (res) {
-                      location.reload()
-                    }
-                  }
-              )
-            }
-          }
-      );
-    });
+    const success = await BuyProduct(props.product.id, login.userid)
+    if (success) await addProduct(props.product.id)
   }
 };
 </script>

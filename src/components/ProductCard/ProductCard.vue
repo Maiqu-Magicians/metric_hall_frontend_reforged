@@ -1,5 +1,4 @@
 <template>
-
     <div>
       <el-card shadow="always" class="product" @click.stop="ClickCard()">
         <img :src="props.product.coverPic" alt=""/>
@@ -39,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import buyProduct from "../../apis/products/buyProduct";
 import {loginState} from "../../store/loginStatus";
 import addProduct from "../../apis/products/addProduct";
 import {ProductStore} from "../../store/products";

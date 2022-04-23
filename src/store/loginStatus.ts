@@ -28,7 +28,7 @@ export const loginState = defineStore("login", {
             return success;
         },
         async wxLogin(code: string): Promise<boolean> {
-            await wxauth(code, state).then((jwt) => {
+            await wxauth(code, "maiqu").then((jwt) => {
                 this.jwtToken = jwt;
                 this.extractUserId();
                 this.isLoggedIn = true;

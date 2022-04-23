@@ -1,7 +1,6 @@
 <template>
   <el-scrollbar height="220px" style="height: 220px;">
     <div class="row">
-
       <div v-for="i in listing">
         <product-card-col :product="i"></product-card-col>
       </div>

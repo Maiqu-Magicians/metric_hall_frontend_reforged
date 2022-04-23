@@ -4,7 +4,6 @@ import wxauth from "../apis/security/wxauth";
 import {smsSend, smsAuth} from "../apis/security/smsAuth";
 
 
-
 export const loginState = defineStore("login", {
     state: () => {
         return {
@@ -29,18 +28,14 @@ export const loginState = defineStore("login", {
             return success;
         },
         async wxLogin(code: string): Promise<boolean> {
-            let success = false;
-            const state = "maiqu";
             await wxauth(code, state).then((jwt) => {
-                this.isLoggedIn = true;
                 this.jwtToken = jwt;
-                const data = jwt.slice(jwt.indexOf(".") + 1, jwt.lastIndexOf("."));
-                const id = eval(`(${atob(data)})`);
-                this.userid = id.jti;
+                this.extractUserId();
+                this.isLoggedIn = true;
                 this.save2Local();
-                success = true;
+                return true
             });
-            return success;
+            return false
         },
         async doSendSms(phone: string): Promise<boolean> {
             let res = false;
@@ -65,16 +60,31 @@ export const loginState = defineStore("login", {
         loadfromLocal() {
             if (localStorage.getItem("jwt")) {
                 this.jwtToken = String(localStorage.getItem("jwt"));
-                const data = this.jwtToken.slice(this.jwtToken.indexOf(".") + 1, this.jwtToken.lastIndexOf("."));
-                const id = eval(`(${atob(data)})`);
-                this.userid = id.jti
-                this.isLoggedIn = true;
-                console.log(`Loaded from local, userID is ${this.userid},jwt is ${this.jwtToken}`)
+                this.extractUserId();
+                if (this.extractExpireTime() - this.getTimeStamp() < 6000) {
+                    this.logout()
+                    return
+                } else {
+                    this.isLoggedIn = true;
+                    console.log(`Loaded from local, userID is ${this.userid}`)
+                }
             }
         },
         logout() {
             localStorage.clear();
-
+        },
+        extractUserId() {
+            const data = this.jwtToken.slice(this.jwtToken.indexOf(".") + 1, this.jwtToken.lastIndexOf("."));
+            const id = eval(`(${window.atob(data)})`);
+            this.userid = id.jti;
+        },
+        extractExpireTime(): number {
+            const data = this.jwtToken.slice(this.jwtToken.indexOf(".") + 1, this.jwtToken.lastIndexOf("."));
+            const id = eval(`(${window.atob(data)})`);
+            return id.exp
+        },
+        getTimeStamp(): number {
+            return Math.round(new Date().getTime() / 1000)
         }
     },
 });

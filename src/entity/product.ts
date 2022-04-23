@@ -10,7 +10,7 @@ export default class Product {
         public readonly name: string,
         public readonly price: string,
         public readonly realUrl: string,
-        public readonly type: string,
+        public readonly type: number,
         public readonly updateTime: string,
         public alreadyHave?: boolean,
         public isLiked?: boolean

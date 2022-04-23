@@ -22,11 +22,13 @@ import {ProductStore} from "../../store/products";
 import {useRouter} from "vue-router";
 import type {TabsPaneContext} from "element-plus";
 import ProductListView from "../../components/Products/ProductListView.vue";
+import Product from "../../entity/product";
 
 const router = useRouter();
 const activeName = ref('0')
 const typeIndex = ref(0)
 const all_products = ProductStore();
+
 
 const handleClick = (tab: TabsPaneContext) => {
   router.push(`/products/all/${tab.paneName}`);
@@ -36,7 +38,7 @@ const handleClick = (tab: TabsPaneContext) => {
 const listing = () => {
   let a = new Array<Product>()
   Object.assign(a, all_products.productLs.filter(i => {
-    return i.type == typeIndex.value || typeIndex.value == 0
+    return i.type === typeIndex.value || typeIndex.value == 0
   }))
   return a;
 };

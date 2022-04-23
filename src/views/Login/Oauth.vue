@@ -24,7 +24,7 @@ onMounted(async () => {
   setTimeout(async () => {
     const res = await login.wxLogin(code.value);
     isOK.value = res;
-    Info.fetchInfo(login.userid,login.jwtToken);
+    await Info.fetchInfo(login.userid);
     if (res && !debug.value) {
       await router.push("/products/all/All");
     }

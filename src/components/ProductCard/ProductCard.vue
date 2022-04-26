@@ -42,7 +42,7 @@ import {loginState} from "../../store/loginStatus";
 import addProduct from "../../apis/products/addProduct";
 import {ProductStore} from "../../store/products";
 import Product from "../../entity/product";
-import {BuyProduct} from "../../apis/products/buyProduct";
+import {BuyProduct, notifyBackend} from "../../apis/products/buyProduct";
 
 const login = loginState()
 
@@ -55,8 +55,8 @@ const ClickCard = async () => {
   if (props.product.alreadyHave) {
     window.open(props.product.realUrl)
   } else {
-    const success = await BuyProduct(props.product.id, login.userid)
-    if (success) location.reload()
+    const result = await BuyProduct(props.product.id, login.userid)
+    if (result.success) await notifyBackend(props.product.id,login.userid,result.orderNo)
   }
 };
 const products = ProductStore()

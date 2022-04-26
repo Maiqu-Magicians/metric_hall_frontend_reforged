@@ -7,7 +7,7 @@ import addProduct from "./addProduct";
  * @param evaId 商品的ID
  * @param userId 用户ID
  */
-export async function BuyProduct(evaId: number, userId: number): Promise<boolean> {
+export async function BuyProduct(evaId: number, userId: number): Promise<{ success: boolean, orderNo: string }> {
     const res = (await axios({
         url: `/api/wx-pay/jsapi/${evaId}`,
         method: "POST",
@@ -24,14 +24,13 @@ export async function BuyProduct(evaId: number, userId: number): Promise<boolean
             signType: "RSA", //微信签名方式：
             paySign: res.paySign, //微信签名
         },
-        (res: any) => {
-            console.log(res)
-            return (res.err_msg == "get_brand_wcpay_request:ok")
+        (r: any) => {
+            return {success:(r.err_msg == "get_brand_wcpay_request:ok"),orderNo:res.orderNo}
         })
-    return false;
+    return {success:false,orderNo:""};
 }
 
-export async function notifyBackend(evaId: number, userId: number, orderNO: number) {
+export async function notifyBackend(evaId: number, userId: number, orderNO: string) {
     await axios.post(`/api/wx-pay/fontNotify?orderNo=${orderNO}&userId=${userId}&evaId=${evaId}`)
 }
 

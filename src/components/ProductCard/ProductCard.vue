@@ -57,7 +57,7 @@ const ClickCard = async () => {
   } else {
     const result = await BuyProduct(props.product.id, login.userid)
     console.log(result)
-    if (result.success) await notifyBackend(props.product.id,login.userid,result.orderNo)
+    if (result.success) location.reload()
   }
 };
 const products = ProductStore()

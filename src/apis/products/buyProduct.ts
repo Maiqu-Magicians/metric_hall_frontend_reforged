@@ -13,6 +13,7 @@ export async function BuyProduct(evaId: number, userId: number): Promise<boolean
         method: "POST",
         data: qs.stringify({userId: userId}),
     })).data.data as payd
+    console.log(res)
     await WeixinJSBridge.invoke(
         "getBrandWCPayRequest",
         {
@@ -24,9 +25,14 @@ export async function BuyProduct(evaId: number, userId: number): Promise<boolean
             paySign: res.paySign, //微信签名
         },
         (res: any) => {
+            console.log(res)
             return (res.err_msg == "get_brand_wcpay_request:ok")
         })
     return false;
+}
+
+export async function notifyBackend(evaId: number, userId: number, orderNO: number) {
+    await axios.post(`/api/wx-pay/fontNotify?orderNo=${orderNO}&userId=${userId}&evaId=${evaId}`)
 }
 
 

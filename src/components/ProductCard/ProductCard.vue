@@ -39,25 +39,23 @@
 
 <script setup lang="ts">
 import {loginState} from "../../store/loginStatus";
-import addProduct from "../../apis/products/addProduct";
 import {ProductStore} from "../../store/products";
 import Product from "../../entity/product";
-import {BuyProduct, notifyBackend} from "../../apis/products/buyProduct";
+import {BuyProduct} from "../../apis/products/buyProduct";
+import {ElMessage, ElMessageBox} from "element-plus";
 
 const login = loginState()
 
 const props = defineProps<{ product: Product, showLike?: boolean }>();
 const ClickCard = async () => {
   if (!login.isLoggedIn) {
-    location.href = "https://api.maiquer.tech/api/wechat/login"
+    PromotLogin();
     return
   }
   if (props.product.alreadyHave) {
     window.open(props.product.realUrl)
   } else {
-    const result = await BuyProduct(props.product.id, login.userid)
-    console.log(result)
-    if (result.success) location.reload()
+    await PromotPayment();
   }
 };
 const products = ProductStore()
@@ -66,6 +64,51 @@ const like = async () => {
 }
 const unlike = async () => {
   await products.delFav(props.product.id)
+}
+
+const PromotLogin = () => {
+  ElMessageBox.confirm(
+      '登录之后才可以做测评哦',
+      'Warning',
+      {
+        confirmButtonText: '好哦',
+        cancelButtonText: '算了',
+        type: 'warning',
+      }
+  )
+      .then(() => {
+        location.href = "https://api.maiquer.tech/api/wechat/login"
+      })
+      .catch(() => {
+        ElMessage({
+          type: 'info',
+          message: '取消了登录',
+        })
+      })
+}
+const PromotPayment = async () => {
+  ElMessageBox.confirm(
+      `需要支付${props.product.price}，继续？`,
+      'Warning',
+      {
+        confirmButtonText: '好哦',
+        cancelButtonText: '算了',
+        type: 'info',
+      }
+  )
+      .then(async () => {
+        const result = await BuyProduct(props.product.id, login.userid)
+        console.log(result)
+        if (result.success) {
+          location.reload()
+        }
+      })
+      .catch(() => {
+        ElMessage({
+          type: 'warning',
+          message: '取消了支付',
+        })
+      })
 }
 </script>
 

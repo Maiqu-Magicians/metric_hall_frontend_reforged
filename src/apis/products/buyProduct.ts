@@ -26,10 +26,10 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
             paySign: res.paySign, //微信签名
         },
         async (r: any) => {
-            console.log(r)
             if (r.err_msg == "get_brand_wcpay_request:ok") {
                 await axios.post(`/api/wx-pay/fontNotify?orderNo=${res.orderNo}&userId=${userId}&evaId=${evaId}`)
                 ret.success = true
+                location.reload()
             }
 
         })

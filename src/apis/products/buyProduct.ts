@@ -14,6 +14,7 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
         data: qs.stringify({userId: userId}),
     })).data.data as payd
     console.log(res)
+    let ret = {success: false, orderNo: res.orderNo}
     await WeixinJSBridge.invoke(
         "getBrandWCPayRequest",
         {
@@ -24,14 +25,15 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
             signType: "RSA", //微信签名方式：
             paySign: res.paySign, //微信签名
         },
-        (r: any) => {
+        async (r: any) => {
             console.log(r)
-            if(r.err_msg == "get_brand_wcpay_request:ok"){
-                axios.post(`/api/wx-pay/fontNotify?orderNo=${res.orderNo}&userId=${userId}&evaId=${evaId}`)
+            if (r.err_msg == "get_brand_wcpay_request:ok") {
+                await axios.post(`/api/wx-pay/fontNotify?orderNo=${res.orderNo}&userId=${userId}&evaId=${evaId}`)
+                ret.success = true
             }
-            return {success: r.err_msg == "get_brand_wcpay_request:ok", orderNo: res.orderNo}
+
         })
-    return {success: false, orderNo: ""};
+    return ret
 }
 
 export async function notifyBackend(evaId: number, userId: number, orderNO: string) {

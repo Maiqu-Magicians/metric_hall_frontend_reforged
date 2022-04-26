@@ -25,13 +25,15 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
             paySign: res.paySign, //微信签名
         },
         (r: any) => {
-            return {success:(r.err_msg == "get_brand_wcpay_request:ok"),orderNo:res.orderNo}
+            console.log(r)
+            return {success: r.err_msg == "get_brand_wcpay_request:ok", orderNo: res.orderNo}
         })
-    return {success:false,orderNo:""};
+    return {success: false, orderNo: ""};
 }
 
 export async function notifyBackend(evaId: number, userId: number, orderNO: string) {
-    await axios.post(`/api/wx-pay/fontNotify?orderNo=${orderNO}&userId=${userId}&evaId=${evaId}`)
+    const r = await axios.post(`/api/wx-pay/fontNotify?orderNo=${orderNO}&userId=${userId}&evaId=${evaId}`)
+    console.log(r)
 }
 
 

@@ -26,7 +26,10 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
         },
         (r: any) => {
             console.log(r)
-            return {success: r.err_msg == "get_brand_wcpay_request:ok", orderNo: res.orderNo}
+            if(r.err_msg == "get_brand_wcpay_r equest:ok"){
+                axios.post(`/api/wx-pay/fontNotify?orderNo=${res.orderNo}&userId=${userId}&evaId=${evaId}`)
+            }
+            return {success: r.err_msg == "get_brand_wcpay_r equest:ok", orderNo: res.orderNo}
         })
     return {success: false, orderNo: ""};
 }

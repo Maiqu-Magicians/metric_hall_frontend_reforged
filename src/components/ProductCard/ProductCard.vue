@@ -98,9 +98,9 @@ const PromotPayment = async () => {
   )
       .then(async () => {
         const result = await BuyProduct(props.product.id, login.userid)
-        console.log(result)
         if (result.success) {
           location.reload()
+          window.open(props.product.realUrl)
         }
       })
       .catch(() => {

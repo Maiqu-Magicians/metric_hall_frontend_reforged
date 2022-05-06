@@ -6,14 +6,14 @@
         <div style="width: 100%; margin-top: 0;">
           <div class="like">
             <span class="title">{{ props.product.name }}</span>
-            <svg v-show="props.showLike" t="1649653878259" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            <svg v-show="props.showLike" class="icon" viewBox="0 0 1024 1024"
                  xmlns="http://www.w3.org/2000/svg"
                  p-id="6323" width="24" height="24" @click.stop="like" v-if="!props.product.isLiked">
               <path
                   d="M512 928c-28.928 0-57.92-12.672-86.624-41.376L106.272 564C68.064 516.352 32 471.328 32 384c0-141.152 114.848-256 256-256 53.088 0 104 16.096 147.296 46.592 14.432 10.176 17.92 30.144 7.712 44.608-10.176 14.432-30.08 17.92-44.608 7.712C366.016 204.064 327.808 192 288 192c-105.888 0-192 86.112-192 192 0 61.408 20.288 90.112 59.168 138.688l315.584 318.816C486.72 857.472 499.616 863.808 512 864c12.704 0.192 24.928-6.176 41.376-22.624l316.672-319.904C896.064 493.28 928 445.696 928 384c0-105.888-86.112-192-192-192-48.064 0-94.08 17.856-129.536 50.272l-134.08 134.112c-12.512 12.512-32.736 12.512-45.248 0s-12.512-32.736 0-45.248l135.104-135.136C610.56 151.808 671.904 128 736 128c141.152 0 256 114.848 256 256 0 82.368-41.152 144.288-75.68 181.696l-317.568 320.8C569.952 915.328 540.96 928 512 928z"
                   p-id="6324" fill="#d81e06"></path>
             </svg>
-            <svg v-show="props.showLike" t="1649655278002" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            <svg v-show="props.showLike" class="icon" viewBox="0 0 1024 1024"
                  xmlns="http://www.w3.org/2000/svg"
                  p-id="6857" width="24" height="24" @click.stop="unlike" v-else>
               <path
@@ -49,13 +49,15 @@ const login = loginState()
 const props = defineProps<{ product: Product, showLike?: boolean }>();
 const ClickCard = async () => {
   if (!login.isLoggedIn) {
-    PromotLogin();
-    return
+    //如果没有登录，就跳转登录页面；
+    PromptLogin();
   }
   if (props.product.alreadyHave) {
+    //如果已经买过，就跳转金数据
     window.open(props.product.realUrl)
   } else {
-    await PromotPayment();
+    //如果没买，就提示购买
+    await PromptPayment();
   }
 };
 const products = ProductStore()
@@ -66,7 +68,7 @@ const unlike = async () => {
   await products.delFav(props.product.id)
 }
 
-const PromotLogin = () => {
+const PromptLogin = () => {
   ElMessageBox.confirm(
       '登录之后才可以做测评哦',
       'Warning',
@@ -86,7 +88,7 @@ const PromotLogin = () => {
         })
       })
 }
-const PromotPayment = async () => {
+const PromptPayment = async () => {
   ElMessageBox.confirm(
       `需要支付${props.product.price}，继续？`,
       'Warning',

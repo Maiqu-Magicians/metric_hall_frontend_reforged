@@ -11,10 +11,7 @@
     <el-tab-pane label="已过期" name="/products/mine/society"></el-tab-pane>
   </el-tabs>
   <el-scrollbar height="400px">
-    <!--    <div v-for="i in listing()">-->
-    <!--      <product-card :product="i"></product-card>-->
     <el-empty description="这里正在施工哦"></el-empty>
-    <!--    </div>-->
   </el-scrollbar>
 </template>
 

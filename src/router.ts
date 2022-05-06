@@ -82,7 +82,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("./views/Login/redir.vue")
     }, {
         path: "/bindPhone",
-        component: () => import("./views/Login/bindPhone.vue")
+        component: () => import("./views/Login/BindPhone.vue")
     }
 ];
 

@@ -1,12 +1,5 @@
 <template>
   <div class="main">
-<!--    <el-card class="main-card" @click="login">-->
-<!--      <img width="50" height="50" :src="info().avtr_url" alt="头像">-->
-<!--      <div class="info">-->
-<!--        <h4>{{ info().name }}</h4>-->
-<!--        <div>测试中，出报告，订阅过期</div>-->
-<!--      </div>-->
-<!--    </el-card>-->
     <el-main>
       <el-tabs
           v-model="activeName"
@@ -30,18 +23,10 @@
 import {ref} from "vue";
 import type {TabsPaneContext} from "element-plus";
 import {useRouter} from "vue-router";
-import {userInfo} from "../store/userInfo";
 import {loginState} from "../store/loginStatus";
 
-const UserInfo = userInfo();
-
-const info = () => {
-  return UserInfo.userInfo;
-};
-
-const router = useRouter();
-
 const activeName = ref("all");
+const router = useRouter();
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   router.push(tab.paneName == "all" ? "/products/all/All" : "/products/mine");

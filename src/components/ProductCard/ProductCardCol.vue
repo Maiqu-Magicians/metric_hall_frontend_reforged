@@ -15,7 +15,6 @@
 <script setup lang="ts">
 import {BuyProduct} from "../../apis/products/buyProduct";
 import {loginState} from "../../store/loginStatus";
-import addProduct from "../../apis/products/addProduct";
 import Product from "../../entity/product";
 
 const login = loginState()

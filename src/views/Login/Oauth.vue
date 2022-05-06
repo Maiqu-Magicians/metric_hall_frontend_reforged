@@ -11,7 +11,6 @@ import {loginState} from "../../store/loginStatus";
 import {userInfo} from "../../store/userInfo";
 
 const isOK = ref(false);
-const debug = ref(false);
 const code = ref("");
 
 const route = useRoute();
@@ -25,7 +24,7 @@ onMounted(async () => {
     const res = await login.wxLogin(code.value);
     isOK.value = res;
     await Info.fetchInfo(login.userid);
-    if (res && !debug.value) {
+    if (res) {
       await router.push("/products/all/All");
     }
   }, 1500);

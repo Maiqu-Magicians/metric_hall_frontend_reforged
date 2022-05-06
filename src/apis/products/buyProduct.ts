@@ -1,6 +1,5 @@
 import axios from "axios";
 import qs from "qs";
-import addProduct from "./addProduct";
 
 /**
  * @description 在购买商品之前的预处理，为了拿到支付的各种凭证
@@ -28,17 +27,13 @@ export async function BuyProduct(evaId: number, userId: number): Promise<{ succe
         async (r: any) => {
             if (r.err_msg == "get_brand_wcpay_request:ok") {
                 await axios.post(`/api/wx-pay/fontNotify?orderNo=${res.orderNo}&userId=${userId}&evaId=${evaId}`)
+                // notify backend
                 ret.success = true
                 location.reload()
             }
 
         })
     return ret
-}
-
-export async function notifyBackend(evaId: number, userId: number, orderNO: string) {
-    const r = await axios.post(`/api/wx-pay/fontNotify?orderNo=${orderNO}&userId=${userId}&evaId=${evaId}`)
-    console.log(r)
 }
 
 

@@ -35,7 +35,6 @@
             >
               <img width="105" :src="info.backgd_url">
             </el-upload>
-
           </td>
           <td> ›</td>
         </tr>

@@ -26,7 +26,6 @@ const img = ref("")
 onMounted(async()=>{
   const p=Products.productLs.find(r=>r.id===id.value)!
   img.value = p.bgPic;
-
 })
 
 

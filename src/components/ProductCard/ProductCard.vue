@@ -172,8 +172,8 @@ const PromptPayment = async () => {
 }
 
 .description {
-  margin-left: 20px;
-  width: 200px;
+  margin-left: 5px;
+  width: 230px;
   margin-right: 0;
 
   & > .title {
@@ -183,7 +183,7 @@ const PromptPayment = async () => {
   }
 
   & .more-info {
-    font-size: 13px;
+    font-size: 12px;
     color: grey;
     line-height: 6px;
   }

@@ -1,6 +1,5 @@
 <template>
     <el-tabs
-        v-model="activeName"
         stretch
         class="demo-tabs"
         @tab-click="handleClick"
@@ -21,13 +20,11 @@ import {ProductStore} from "../../store/products";
 import {useRouter} from "vue-router";
 import type {TabsPaneContext} from "element-plus";
 import ProductListView from "../../components/Products/ProductListView.vue";
-import Product from "../../entity/product";
 
 const router = useRouter();
-const activeName = ref('0')
-const typeIndex = ref(0)
 const all_products = ProductStore();
 
+const typeIndex = ref(0)
 
 const handleClick = (tab: TabsPaneContext) => {
     router.push(`/products/all/${tab.paneName}`);
@@ -35,7 +32,6 @@ const handleClick = (tab: TabsPaneContext) => {
     setTimeout(() => {
         typeIndex.value = Number(tab.paneName)
     }, 50)
-
 };
 
 const listing = computed(() => {

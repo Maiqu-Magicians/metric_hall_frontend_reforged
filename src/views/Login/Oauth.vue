@@ -1,32 +1,26 @@
 <template>
-    <div v-if="!isOK">正在处理登录.....</div>
+    <div v-if="!state.isOK">正在处理登录.....</div>
     <div v-else>正在跳转......</div>
-    <template></template>
 </template>
 
 <script lang="ts" setup>
-import {useRoute, useRouter} from "vue-router";
-import {ref, onMounted} from "vue";
+import {useRoute,} from "vue-router";
+import {onMounted, reactive} from "vue";
 import {loginState} from "../../store/loginStatus";
-import {userInfo} from "../../store/userInfo";
 
-const isOK = ref(false);
-const code = ref("");
+const state = reactive({
+    isOK: false,
+    code: ""
+})
 
 const route = useRoute();
-const router = useRouter();
 const login = loginState();
-const Info = userInfo();
 
-code.value = route.query.code as string;
+state.code = route.query.code as string;
 onMounted(async () => {
     setTimeout(async () => {
-        const res = await login.wxLogin(code.value);
-        isOK.value = res;
-        await Info.fetchInfo(login.userid);
-        if (res) {
-            await router.push("/products/all/All");
-        }
+        state.isOK = await login.wxLogin(state.code);
+        if (state.isOK) location.href = "/";
     }, 1500);
 });
 </script>

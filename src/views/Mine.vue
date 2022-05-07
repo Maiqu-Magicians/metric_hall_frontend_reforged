@@ -15,6 +15,5 @@ import MineCard from "../components/Mine/MineCard.vue";
   margin-top: 0;
   height: 100vh;
   background-color: #f0f0f0;
-  // border: 1px solid;
 }
 </style>

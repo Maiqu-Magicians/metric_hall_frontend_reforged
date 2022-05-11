@@ -28,14 +28,15 @@ export const loginState = defineStore("login", {
             return success;
         },
         async wxLogin(code: string): Promise<boolean> {
+            let success = false;
             await wxauth(code, "maiqu").then((jwt) => {
                 this.jwtToken = jwt;
                 this.extractUserId();
                 this.isLoggedIn = true;
                 this.save2Local();
-                return true
+                success = true;
             });
-            return false
+            return success;
         },
         async doSendSms(phone: string): Promise<boolean> {
             let res = false;

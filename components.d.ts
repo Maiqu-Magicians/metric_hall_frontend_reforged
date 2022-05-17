@@ -28,11 +28,13 @@ declare module 'vue' {
     MineInfo: typeof import('./src/components/Mine/MineInfo.vue')['default']
     ProductCard: typeof import('./src/components/ProductCard/ProductCard.vue')['default']
     ProductCardCol: typeof import('./src/components/ProductCard/ProductCardCol.vue')['default']
-    ProductListView: typeof import('./src/components/Products/ProductListView.vue')['default']
-    ProductRowView: typeof import('./src/components/Products/ProductRowView.vue')['default']
+    ProductGridView: typeof import('./src/components/ProductsLists/ProductGridView.vue')['default']
+    ProductListView: typeof import('./src/components/ProductsLists/ProductListView.vue')['default']
+    ProductRowView: typeof import('./src/components/ProductsLists/ProductRowView.vue')['default']
     RadioChoice: typeof import('./src/components/Questionare/RadioChoice.vue')['default']
     RecommendProducts: typeof import('./src/components/Home/RecommendProducts.vue')['default']
     Sample: typeof import('./src/components/sample.vue')['default']
+    TitleSort: typeof import('./src/components/Sundry/TitleSort.vue')['default']
     TopCar: typeof import('./src/components/Home/TopCar.vue')['default']
   }
 }

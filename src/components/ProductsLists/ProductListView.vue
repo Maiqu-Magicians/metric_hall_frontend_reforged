@@ -2,8 +2,7 @@
   <transition-group enter-active-class="animate__animated animate__bounceInUp" appear
                     appear-active-class="animate__animated animate__bounceInUp"
                      mode="out-in">
-
-    <div v-for="i of props.listing " :key="i.id">
+    <div v-for="i of props.listing " :key="i.id" class="">
       <product-card :product="i" :showLike="props.showLike"></product-card>
     </div>
   </transition-group>
@@ -14,8 +13,7 @@ import Product from "../../entity/product";
 import {PropType} from "vue";
 
 const props = defineProps({
-  listing: {type: Array as PropType<Product[]>},
-  showLike: Boolean
+  listing: {type: Array as PropType<Product[]>}
 })
 </script>
 

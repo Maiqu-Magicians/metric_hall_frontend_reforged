@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mains">
     <main-footer/>
     <router-view/>
   </div>
@@ -33,3 +33,10 @@ onBeforeMount(async () => {
 )
 
 </script>
+
+
+<style>
+body {
+    background: linear-gradient(0deg, rgba(41, 41, 41, 1) 0%, rgba(86, 49, 122, 1) 100%) fixed;
+}
+</style>

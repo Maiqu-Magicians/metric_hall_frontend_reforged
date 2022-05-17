@@ -1,5 +1,5 @@
 <template>
-    <div class="card-container" @click="ClickCard" :id="card_id">
+    <div class="card-container" @click="ClickCard" :id="card_id" :class="{zindex: isClicked}">
         <div class="cover">
 
         </div>
@@ -65,12 +65,16 @@ const ClickCard = async () => {
 </script>
 
 <style lang="scss" scoped>
+.zindex {
+    z-index: 999;
+}
+
 .card-container {
+    display: block;
     height: 200px;
     width: 100px;
     overflow: visible;
     position: relative;
-    -webkit-perspective: 1000px;
 
     & > .cover {
         position: absolute;

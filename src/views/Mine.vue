@@ -1,5 +1,6 @@
 <template>
   <div class="mine">
+<!--      todo: reforge-->
     <mine-info></mine-info>
     <mine-card></mine-card>
   </div>

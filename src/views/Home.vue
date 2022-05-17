@@ -1,9 +1,11 @@
 <template>
-  <top-car />
-  <intro-card />
-  <have-a-try />
-  <recommend-products/>
-  <el-empty description="咖啡店正在施工哦"/>
+<!--  <top-car />-->
+<!--  <intro-card />-->
+<!--  <have-a-try />-->
+<!--  <recommend-products/>-->
+<!--  <el-empty description="咖啡店正在施工哦"/>-->
+<!--    todo: top cars -->
+<!--    todo: hot cards-->
 
 </template>
 

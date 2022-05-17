@@ -19,7 +19,7 @@ import {computed, ref} from "vue";
 import {ProductStore} from "../../store/products";
 import {useRouter} from "vue-router";
 import type {TabsPaneContext} from "element-plus";
-import ProductListView from "../../components/Products/ProductListView.vue";
+import ProductListView from "../../components/ProductsLists/ProductListView.vue";
 
 const router = useRouter();
 const all_products = ProductStore();

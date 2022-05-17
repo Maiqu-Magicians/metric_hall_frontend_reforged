@@ -258,7 +258,7 @@
 
 <script lang="ts" setup>
 import {computed, onMounted, ref} from "vue";
-import ProductListView from "../../components/Products/ProductListView.vue";
+import ProductListView from "../../components/ProductsLists/ProductListView.vue";
 import {ProductStore} from "../../store/products";
 
 

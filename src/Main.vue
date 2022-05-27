@@ -1,8 +1,8 @@
 <template>
-  <div class="mains">
-    <main-footer/>
-    <router-view/>
-  </div>
+    <div class="mains">
+        <main-footer/>
+        <router-view/>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -18,17 +18,17 @@ const login = loginState();
 const info = userInfo();
 const products = ProductStore();
 
-axios.defaults.baseURL="https://api.maiquer.tech"
+axios.defaults.baseURL = "https://api.maiquer.tech"
 
 
 onBeforeMount(async () => {
 //after mounted, init products
-      login.loadfromLocal();
-      await products.getAll();
-      if (login.isLoggedIn) {
-        axios.defaults.headers.common["Authorization"] = login.jwtToken
-        await info.fetchInfo(login.userid)
-      }
+        login.loadfromLocal();
+        await products.getAll();
+        if (login.isLoggedIn) {
+            axios.defaults.headers.common["Authorization"] = login.jwtToken
+            await info.fetchInfo(login.userid)
+        }
     }
 )
 
@@ -37,6 +37,7 @@ onBeforeMount(async () => {
 
 <style>
 body {
-    background: linear-gradient(0deg, rgba(41, 41, 41, 1) 0%, rgba(86, 49, 122, 1) 100%) fixed;
+    background: url("https://img-cdn.dustella.net/sundry/maiback.webp") no-repeat fixed center;
+    background-size: cover;
 }
 </style>

@@ -58,7 +58,7 @@ import {fail} from "assert";
 const activeTabs = reactive({
   Home: false,
   Mine: false,
-  Products: false
+  Products: true
 })
 const router = useRouter();
 const route = useRoute()
@@ -75,7 +75,7 @@ const pushMine = () => {
   activeTabs.Mine = true;
 };
 const pushProducts = () => {
-  router.push("/products/all");
+  router.push("/products");
   activeTabs.Home=false;
   activeTabs.Products = true;
   activeTabs.Mine = false;
@@ -87,7 +87,7 @@ onMounted(() => {
   }else if(r.includes("mine")){
     activeTabs.Mine = true
   }else{
-    activeTabs.Home = true
+    activeTabs.Products = true
   }
 })
 </script>

@@ -1,11 +1,12 @@
 <template>
     <!--todo: v for items in cols-->
+
     <title-sort v-for="(i,k) in types"
                 class="title" :isActive="i.isActive"
                 @click="toggleType(k)">
         {{ i.name }}
     </title-sort>
-    <product-grid-view :listing="listing"></product-grid-view>
+    <product-grid-view :listing="listing" class="grid-view"></product-grid-view>
 </template>
 
 <script lang="ts" setup>
@@ -14,9 +15,9 @@ import {computed, reactive, ref} from "vue";
 import ProductGridView from "../components/ProductsLists/ProductGridView.vue";
 
 const types = reactive([
-    {name: "自我", isActive: true},
-    {name: "群体", isActive: false},
-    {name: "社会", isActive: false}
+    {name: "自我牌阵", isActive: true},
+    {name: "群体牌阵", isActive: false},
+    {name: "社会排阵", isActive: false}
 ])
 
 const type = ref(1)
@@ -36,13 +37,19 @@ const listing = computed(() => {
 
 <style lang="scss" scoped>
 .title {
+    position: relative;
+    top: 30px;
+    bottom: 30px;
     display: inline;
     line-height: 40px;
     width: 200px;
-    position: relative;
     color: oldlace;
     font-size: 25px;
     margin-left: 20px;
     margin-top: 20px;
+}
+
+.grid-view{
+    margin-top: 30px;
 }
 </style>

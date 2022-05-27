@@ -7,6 +7,6 @@ import 'animate.css';
 import 'element-plus/dist/index.css'
 
 
-const vConsole = new VConsole();
+// const vConsole = new VConsole();
 
 createApp(App).use(createPinia()).use(router).mount('#app')

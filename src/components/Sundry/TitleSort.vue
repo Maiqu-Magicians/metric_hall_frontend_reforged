@@ -7,8 +7,8 @@
             <path id="矩形 1" style="stroke:#FFFFFF; stroke-width:1; stroke-opacity:1; stroke-dasharray:0 0"
                   transform="translate(0 0)  rotate(0 52.25 17)"
                   d="M104.5,18.39L93.77,0L11.57,0L0,18.39L11.57,34L93.77,34L104.5,18.39Z "/>
-            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" stroke-width="0"
-                  fill="#FFFFFF" id="svg_1" y="26.06779" x="27.84323" stroke-dasharray="0 0" stroke="#FFFFFF"><slot></slot></text>
+            <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="18" stroke-width="0"
+                  fill="#FFFFFF" id="svg_1" y="23.06779" x="15.84333" stroke-dasharray="0 0" stroke="#FFFFFF"><slot></slot></text>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="34"
              viewBox="0 0 15 34" fill="none" v-if="props.isActive">

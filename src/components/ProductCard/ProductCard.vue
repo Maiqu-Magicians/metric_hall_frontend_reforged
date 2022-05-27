@@ -4,8 +4,11 @@
 
         </div>
         <div class="back">
-
+            <div class="des-container">
+                <router-view/>
+            </div>
         </div>
+        <p v-show="!isClicked">{{ props.product.name }}</p>
     </div>
 </template>
 
@@ -13,26 +16,61 @@
 import Product from "../../entity/product";
 import {computed, ref} from "vue";
 
-const props = defineProps<{ product: Product, showLike?: boolean }>();
+const props = defineProps<{ product:  Product, showLike?: boolean }>();
 const card_id = `card-${props.product.id}-${Math.round(Math.random() * 10000)}`
 
 const card = (): HTMLElement => {
     return document.getElementById(card_id) as HTMLElement;
 }
 
-const ratio = 2.5;
+
+const urls = ["https://images.maiquer.tech/site-imgs/tar1.webp",
+    "https://images.maiquer.tech/site-imgs/tar2.webp",
+    "https://images.maiquer.tech/site-imgs/tar3.webp",
+    "https://images.maiquer.tech/site-imgs/tar4.webp",
+    "https://images.maiquer.tech/site-imgs/tar5.webp",
+    "https://images.maiquer.tech/site-imgs/tar6.webp",
+    "https://images.maiquer.tech/site-imgs/tar7.webp",
+    "https://images.maiquer.tech/site-imgs/tar8.webp",
+    "https://images.maiquer.tech/site-imgs/tar9.webp",
+    "https://images.maiquer.tech/site-imgs/tar10.webp",
+    "https://images.maiquer.tech/site-imgs/tar11.webp",
+    "https://images.maiquer.tech/site-imgs/tar12.webp",
+    "https://images.maiquer.tech/site-imgs/tar13.webp",
+    "https://images.maiquer.tech/site-imgs/tar14.webp",
+    "https://images.maiquer.tech/site-imgs/tar15.webp",
+    "https://images.maiquer.tech/site-imgs/tar16.webp",
+    "https://images.maiquer.tech/site-imgs/tar17.webp",
+    "https://images.maiquer.tech/site-imgs/tar18.webp",
+    "https://images.maiquer.tech/site-imgs/tar19.webp",
+    "https://images.maiquer.tech/site-imgs/tar20.webp",
+    "https://images.maiquer.tech/site-imgs/tar21.webp",
+    "https://images.maiquer.tech/site-imgs/tar22.webp",
+    "https://images.maiquer.tech/site-imgs/tar23.webp",
+    "https://images.maiquer.tech/site-imgs/tar24.webp",
+    "https://images.maiquer.tech/site-imgs/tar25.webp",
+    "https://images.maiquer.tech/site-imgs/tar26.webp",
+    "https://images.maiquer.tech/site-imgs/tar27.webp",
+    "https://images.maiquer.tech/site-imgs/tar28.webp",
+    "https://images.maiquer.tech/site-imgs/tar29.webp"
+];
+
+const backgroundImage = computed(() => {
+    return `url(${urls[Math.floor(Math.random() * urls.length)]})`;
+})
+const ratio = 4;
 const isClicked = ref(false);
 
 const deg1 = computed(() => {
-    return `${isClicked.value ? 180 : 0}deg`
+    return `${isClicked.value ? 180 : 0}deg`;
 })
 
 const deg2 = computed(() => {
-    return `${!isClicked.value ? -180 : 0}deg`
+    return `${!isClicked.value ? -180 : 0}deg`;
 })
 
 const scl = computed(() => {
-    return `${isClicked.value ? ratio : 1},${isClicked.value ? ratio : 1}`
+    return `${isClicked.value ? ratio : 1},${isClicked.value ? ratio : 1}`;
 })
 
 const CardPos = (): { x: number, y: number } => {
@@ -71,31 +109,50 @@ const ClickCard = async () => {
 
 .card-container {
     display: block;
-    height: 200px;
-    width: 100px;
+    height: 130px;
+    width: 91px;
+    border-radius: 10px;
     overflow: visible;
     position: relative;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
 
     & > .cover {
         position: absolute;
         width: 100%;
-        height: 200px;
-        background: url("https://img-cdn.dustella.net/sundry/塔罗.jpg") no-repeat center;
+        border-radius: 15px;
+
+        height: 130px;
+        background: v-bind(backgroundImage) no-repeat center;
         backface-visibility: hidden;
-        background-size: cover;
+        background-size: contain;
         transform: rotateY(v-bind(deg1)) scale(v-bind(scl)) translate(v-bind(translate));
         transition: all 0.5s ease;
     }
 
+    & > p {
+        margin-top: 140px;
+        text-align: center;
+        color: #ffeca9;
+        font-size: 15px;
+    }
+
     & > .back {
         position: absolute;
-        height: 200px;
+        height: 130px;
         width: 100%;
         backface-visibility: hidden;
-        background: url("https://img-cdn.dustella.net/sundry/29519e5f5627ebb88b6b10c40fb019f8.jpg") no-repeat center;
+        background: #EDE6FF no-repeat center;
+        border-radius: 10px;
         background-size: cover;
         transform: rotateY(v-bind(deg2)) scale(v-bind(scl)) translate(v-bind(translate));
         transition: all 0.5s ease;
+        padding: 1px;
+
+        & > .des-container {
+            margin: 2%;
+            height: 98%;
+            border: 1px;
+        }
     }
 }
 </style>

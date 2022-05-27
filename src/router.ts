@@ -14,21 +14,8 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/products",
         name: "Products",
-        redirect: "/products/all",
         component: () => import("./views/Products.vue"),
         children: [
-            {
-                path: "All",
-                redirect: "/products/All/all",
-            },
-            {
-                path: "mine",
-                redirect: "/products/mine/all",
-            },
-            {
-                path: "All/:type",
-                component: () => import("./views/Products/All.vue"),
-            },
             {
                 path: "mine/:type",
                 component: () => import("./views/Products/Self.vue")
